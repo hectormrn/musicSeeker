@@ -1,2 +1,3 @@
-# e-socialSeeker
-e-socialSeeker is a Social Media seeker.
+
+# musicSeeker
+A spotify music seeker
