@@ -17,8 +17,6 @@ module.exports = {
   module: {
     rules: [
       {
-        // test: que tipo de archivo quiero reconocer,
-        // use: que loader se va a encargar del archivo
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
         use: {
