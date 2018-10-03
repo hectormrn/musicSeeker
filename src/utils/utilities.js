@@ -1,4 +1,6 @@
-export const getHashParams = () => {
+const path = require('path');
+
+const getHashParams = () => {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
         q = window.location.hash.substring(1);
@@ -10,11 +12,7 @@ export const getHashParams = () => {
     return hashParams;
 }  
 
-const getToken = () => {
-    const params = getHashParams();
-    const token = params.access_token;
-    if (token) {
-      //spotifyApi.setAccessToken(token);
-    }
-    return token;
+export const getToken = () => {
+    const params = getHashParams() || localStorage.getItem('sptoken');
+    return params.access_token;
 }
