@@ -13,6 +13,7 @@ const getHashParams = () => {
 }  
 
 export const getToken = () => {
-    const params = getHashParams() || localStorage.getItem('sptoken');
+    let token = localStorage.getItem('sptoken');
+    const params = token ? token: getHashParams();
     return params.access_token;
 }

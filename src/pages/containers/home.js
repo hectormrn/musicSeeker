@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import SpotifyWebApi from "spotify-web-api-js";
+import ApiClient from "../../http/apiClient";
 import HomeLayout from '../components/home-layout';
-import { getToken } from '../../utils/utilities';
 import Search from '../../shared/components/search';
 import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
@@ -10,16 +9,11 @@ import ModalContainer from "../../shared/container/modal";
 import './App.scss';
 import Modal from '../../shared/components/modal';
 
-const spotifyApi = new SpotifyWebApi();
-
 class Home extends Component {
   constructor(){
     super();
-    //TODO refactor this
-    const token = getToken();
-    if (token) {
-      spotifyApi.setAccessToken(token);
-    }
+    this.api = new ApiClient();
+    const token = this.api.getSPToken();
     this.state = {
       loggedIn: token ? true : false,
       tracks: [],
@@ -27,20 +21,15 @@ class Home extends Component {
     }
   }
 
-  //TODO refactor this...
   simpleSearch(e){
     e.preventDefault();
     if (this.state.keyword.trim() === "") {
-      this.setState({tracks: []});
+      this.setState({ tracks: [] });
       return;
     }
-    spotifyApi.searchTracks(this.state.keyword, {limit: 7})
-    .then((data) => {
-      console.log(`Result by ${this.state.keyword}`);
-      console.log(data.tracks.items);
-      this.setState({tracks: data.tracks.items})
-    }).catch((err)=>{
-      console.log("err: ", err)
+    this.api.searchTracks(this.state.keyword, 10)
+    .then( (arrTracks) => {
+      this.setState({tracks: arrTracks})
     })
   }
 
