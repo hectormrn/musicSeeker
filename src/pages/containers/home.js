@@ -8,6 +8,7 @@ import Nav from "../../shared/components/nav";
 import ModalContainer from "../../shared/container/modal";
 import './App.scss';
 import Modal from '../../shared/components/modal';
+import Footer from "../../shared/components/footer";
 
 class Home extends Component {
   constructor(){
@@ -36,8 +37,8 @@ class Home extends Component {
   render() {
     return (
       <HandleError>
+        <Nav loggedIn={this.state.loggedIn}/>
         <HomeLayout>
-          <Nav loggedIn={this.state.loggedIn}/>
           <Search 
             onType={(str) => this.setState({keyword: str})}
             onSearch={(e) => this.simpleSearch(e)} 
@@ -52,6 +53,7 @@ class Home extends Component {
             </ModalContainer>
           }  
         </HomeLayout>
+        <Footer />
       </HandleError>
     )
   }
