@@ -4,7 +4,6 @@ import HomeLayout from '../components/home-layout';
 import Search from '../../shared/components/search';
 import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
-import Nav from "../../shared/components/nav";
 import ModalContainer from "../../shared/container/modal";
 import './App.scss';
 import Modal from '../../shared/components/modal';
@@ -37,7 +36,6 @@ class Home extends Component {
   render() {
     return (
       <HandleError>
-        <Nav loggedIn={this.state.loggedIn}/>
         <HomeLayout>
           <Search 
             onType={(str) => this.setState({keyword: str})}
