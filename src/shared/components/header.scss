@@ -1,0 +1,10 @@
+.Header{
+    &-nav{
+        background-color: #191414;
+    }
+    .nav-item{
+        a.is-selected{
+            border-bottom: 3px solid #FEFEFE;
+        }
+    }
+}

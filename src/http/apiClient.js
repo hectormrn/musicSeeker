@@ -1,11 +1,13 @@
 /**
- * 
+ *
  */
 import SpotifyWebApi from "spotify-web-api-js";
 import { getToken } from './utilities';
+import HttpExceptionHanlder from "./httpExceptionHandler";
 
 const spotifyApi = new SpotifyWebApi();
 let instance = null;
+const httpErrorHandler = new HttpExceptionHanlder();
 
  class ApiClient {
     constructor () {
@@ -25,10 +27,12 @@ let instance = null;
         }
     }
 
-    getSPToken = (token) => spotifyApi.getAccessToken()
+    getSPToken = () => spotifyApi.getAccessToken()
 
-    resetToken () {
-
+    static exit = () => {
+        spotifyApi.setAccessToken(null);
+        localStorage.removeItem('sptoken')
+        location.href = "http://localhost:9000";
     }
 
     /**
@@ -43,11 +47,7 @@ let instance = null;
             console.log(data.tracks.items);
             return data.tracks.items;
         }, (error) => {
-            //TODO httpExeptionHandler..
-            let err = JSON.parse(error.response);
-            console.warn(err);
-            alert(`SpotifyErr - ${err.error.message || 'Ocurrio un Error'}`);
-            if (err.error.status === 401) location.href = "http://localhost:9000";
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
 

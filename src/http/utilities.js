@@ -13,7 +13,8 @@ const getHashParams = () => {
 }  
 
 export const getToken = () => {
-    let token = localStorage.getItem('sptoken');
-    const params = token ? token: getHashParams();
-    return params.access_token;
+    let token = localStorage.getItem('sptoken'); 
+    token = token ? token: getHashParams().access_token ? getHashParams().access_token: undefined;
+    token ? localStorage.setItem('sptoken', token): localStorage.removeItem('sptoken'); 
+    return token;
 }

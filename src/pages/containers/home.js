@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ApiClient from "../../http/apiClient";
 import HomeLayout from '../components/home-layout';
 import Search from '../../shared/components/search';
 import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
-import ModalContainer from "../../shared/container/modal";
+import Login from '../components/login';
 import './App.scss';
-import Modal from '../../shared/components/modal';
 import Footer from "../../shared/components/footer";
 
 class Home extends Component {
@@ -37,18 +36,17 @@ class Home extends Component {
     return (
       <HandleError>
         <HomeLayout>
-          <Search 
-            onType={(str) => this.setState({keyword: str})}
-            onSearch={(e) => this.simpleSearch(e)} 
-          />
-          <TrackList tracks={this.state.tracks} />
           {
-            !this.state.loggedIn &&
-            <ModalContainer>
-              <Modal handleClick={()=>{console.log("handle this")}} btnActive={false}>
-                <a href="http://localhost:8888/login"><button className="button-login">Start app</button></a>
-              </Modal>
-            </ModalContainer>
+          this.state.loggedIn ?
+            <Fragment>
+              <Search 
+                onType={(str) => this.setState({keyword: str})}
+                onSearch={(e) => this.simpleSearch(e)} 
+              />
+              <TrackList tracks={this.state.tracks} />
+            </Fragment>
+          :
+           <Login />
           }  
         </HomeLayout>
         <Footer />
