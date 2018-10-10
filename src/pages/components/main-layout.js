@@ -1,7 +1,7 @@
 import React from "react";
-import './HomeLayout.scss';
+import './main-layout.scss';
 
-function HomeLayout (props) {
+function MainLayout (props) {
     return (
         <section className="main">
             <div className="container">
@@ -11,4 +11,4 @@ function HomeLayout (props) {
     )
 }
 
-export default HomeLayout;
+export default MainLayout;

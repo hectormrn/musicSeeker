@@ -1,5 +1,3 @@
-$btn-color: #e2e2e2;
-$btn-bg-color: #00591E;
 body{
     margin: 0px;
     padding: 0px;
@@ -7,24 +5,4 @@ body{
 }
 a{
     text-decoration: none;
-}
-
-.button-login{
-    display: block;
-    width: 250px;
-    height: 60px;
-    text-align: center;
-    color: $btn-color;
-    background-color: $btn-bg-color;
-    border-radius: 10px;
-    font-size: 18px;
-    font-family: 'Karla', sans-serif;
-    border-color: transparent;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    cursor: pointer;
 }

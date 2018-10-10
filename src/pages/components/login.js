@@ -1,13 +1,12 @@
 import React from "react";
-import ModalContainer from "../../shared/container/modal";
-import Modal from '../../shared/components/modal';
+import './login.scss';
 
-const Login = () => (
-    <ModalContainer>
-        <Modal handleClick={()=>{console.log("handle this")}} btnActive={false}>
-        <a href="http://localhost:8888/login"><button className="button-login">Connect with Spotify</button></a>
-        </Modal>
-    </ModalContainer>
+const Login = (props) => (
+    <div className="Login">
+        <a href="http://localhost:8888/login">
+            <button className="button-login">Connect with Spotify</button>
+        </a>
+    </div>
 )
 
 export default Login;

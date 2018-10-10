@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ApiClient from "../../http/apiClient";
-import HomeLayout from '../components/home-layout';
+import MainLayout from '../components/main-layout';
 import Search from '../../shared/components/search';
 import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
@@ -35,7 +35,7 @@ class Home extends Component {
   render() {
     return (
       <HandleError>
-        <HomeLayout>
+        <MainLayout>
           {
           this.state.loggedIn ?
             <Fragment>
@@ -48,7 +48,7 @@ class Home extends Component {
           :
            <Login />
           }  
-        </HomeLayout>
+        </MainLayout>
         <Footer />
       </HandleError>
     )
