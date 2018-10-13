@@ -5,14 +5,15 @@ const Search = (props) => (
             <div className="form-group">
             <input 
                 type="text" 
-                onChange={ (evt) => props.onType(evt.target.value) }
+                onChange={props.onTyping}
+                onKeyPress={props.handlekp}
                 className="form-control"
                 />
             </div>
             <div className="form-group text-center">
                 <button 
                     type="button"
-                    onClick={ e => props.onSearch(e)}
+                    onClick={props.onSearch}
                     className="btn btn-primary"  
                     >
                 Search

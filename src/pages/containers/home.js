@@ -4,52 +4,54 @@ import MainLayout from '../components/main-layout';
 import Search from '../../shared/components/search';
 import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
-import Login from '../components/login';
+import MixPreview from '../components/mix-preview';
 import './App.scss';
-import Footer from "../../shared/components/footer";
 
 class Home extends Component {
-  constructor(){
+  constructor(props){
     super();
     this.api = new ApiClient();
-    const token = this.api.getSPToken();
     this.state = {
-      loggedIn: token ? true : false,
-      tracks: [],
-      keyword: ""
+      loggedIn: false,
+      keyword: "",
+      mixed: []
     }
   }
 
-  simpleSearch(e){
+  getMixData = e => {
     e.preventDefault();
     if (this.state.keyword.trim() === "") {
-      this.setState({ tracks: [] });
       return;
     }
-    this.api.searchTracks(this.state.keyword, 10)
-    .then( (arrTracks) => {
-      this.setState({tracks: arrTracks})
-    })
+    this.api.searchMixed(this.state.keyword, 4)
+    .then( (mixData) => {
+      this.setState({mixed: mixData})
+    });
+  }
+
+  handleKeyPress = e => {
+    if (e.charCode == 13){
+      e.preventDefault()
+      this.getMixData(e);
+    }
   }
 
   render() {
     return (
       <HandleError>
         <MainLayout>
-          {
-          this.state.loggedIn ?
             <Fragment>
               <Search 
-                onType={(str) => this.setState({keyword: str})}
-                onSearch={(e) => this.simpleSearch(e)} 
+                onTyping={ e => this.setState({keyword: e.target.value})}
+                handlekp={this.handleKeyPress}
+                onSearch={this.getMixData}
               />
-              <TrackList tracks={this.state.tracks} />
+              <MixPreview data={this.state.mixed[0]} title="Tracks"/><hr />
+              <MixPreview data={this.state.mixed[1]} title="Artists"/><hr />
+              <MixPreview data={this.state.mixed[2]} title="Albums"/><hr />
+              <MixPreview data={this.state.mixed[3]} title="Playlists"/><hr />
             </Fragment>
-          :
-           <Login />
-          }  
         </MainLayout>
-        <Footer />
       </HandleError>
     )
   }
