@@ -1,17 +1,20 @@
 import React from "react";
-//import Media from "../../shared/components/Media";
+import Media from "../../shared/components/Media";
 
 const MixPreview = props => (
-    <div className="row">
-        <h3>{props.title}</h3>
-        <ul>
+    <div className="container">
+        <div className="">
+            <label>{props.title}</label>
+            <a href="" style={{float:'right'}}>Ver todos</a>
+        </div>
+        <div className="row border" style={{padding:'5px 0'}} >
         {
             props.data && 
             props.data.map( item => {
-                return <li key={item.id} >{item.name}</li>
+                return <Media data={item} key={item.id}/>    
             })
         }
-        </ul>
+        </div>
     </div>
 )
 

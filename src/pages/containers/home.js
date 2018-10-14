@@ -21,6 +21,7 @@ class Home extends Component {
   getMixData = e => {
     e.preventDefault();
     if (this.state.keyword.trim() === "") {
+      this.setState({mixed: []});
       return;
     }
     this.api.searchMixed(this.state.keyword, 4)
@@ -46,10 +47,10 @@ class Home extends Component {
                 handlekp={this.handleKeyPress}
                 onSearch={this.getMixData}
               />
-              <MixPreview data={this.state.mixed[0]} title="Tracks"/><hr />
-              <MixPreview data={this.state.mixed[1]} title="Artists"/><hr />
-              <MixPreview data={this.state.mixed[2]} title="Albums"/><hr />
-              <MixPreview data={this.state.mixed[3]} title="Playlists"/><hr />
+                <MixPreview data={this.state.mixed[0]} title="Tracks"/>
+                <MixPreview data={this.state.mixed[1]} title="Artists"/>
+                <MixPreview data={this.state.mixed[2]} title="Albums"/>
+                <MixPreview data={this.state.mixed[3]} title="Playlists"/>
             </Fragment>
         </MainLayout>
       </HandleError>

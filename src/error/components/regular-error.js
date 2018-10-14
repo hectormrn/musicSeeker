@@ -2,7 +2,7 @@ import React from "react";
 
 function RegularError (props) {
     return(
-        <h1>La embarraste en algun lugar :( </h1>
+        <h1 className="Regular-error-text">La embarraste 💩 revisa tu código 👎 </h1>
     )
 }
 
