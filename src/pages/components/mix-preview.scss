@@ -1,0 +1,11 @@
+.Mix{
+    margin-bottom: 5px;
+    &-body{
+        padding: 5px auto;
+        &-link{
+            text-decoration: none;
+            color: #1db954;
+            float: right;
+        }
+    }
+}

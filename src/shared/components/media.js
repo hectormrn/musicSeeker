@@ -8,7 +8,7 @@ const Media = props => (
             width={80} height={80} 
             src={getMediaThumbnail(props.data)}
         />
-        <div className="media-body">
+        <div className="media-body" style={{paddingLeft:'5px'}}>
         <h6 className="mt-0 mb-1">{props.data.name}</h6>
             Description...
         </div>
