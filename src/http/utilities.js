@@ -37,6 +37,17 @@ export const getImgMediaClass = (data) => {
     return clssName;
 }
 
+export const getMediaDescription = (data) => {
+    switch(data.type){
+        case 'album':
+            return data.artists[0].name
+        case 'playlist':
+            return `Total tracks ${data.tracks.total}`
+        case 'track':
+            return data.artists[0].name
+    }
+}
+
 export const getToken = () => {
     let token = localStorage.getItem('sptoken'); 
     token = token ? token: getHashParams().access_token ? getHashParams().access_token: undefined;

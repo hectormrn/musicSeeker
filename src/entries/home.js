@@ -8,6 +8,11 @@ import menu from "../menu.json";
 import ApiClient from '../http/apiClient';
 import Login from '../pages/components/login';
 import Footer from '../shared/components/footer';
+import MediaGrid from '../pages/components/media-grid';
+import Album from '../pages/containers/album';
+import Artist from '../pages/containers/artist';
+import Profile from '../pages/containers/profile';
+import NowPlaying from '../pages/containers/now-playing';
 
 const homeContainer = document.getElementById('home-container')
 const api = new ApiClient();
@@ -21,11 +26,12 @@ ReactDOM.render(
             <Header data={menu}/>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/tracks" render={()=>(<div>Tracks...</div>)} />
-                <Route exact path="/albums" render={()=>(<div>Albums...</div>)} />
-                <Route exact path="/artist" render={()=>(<div>Artist...</div>)} />
-                <Route exact path="/now-playing" render={()=>(<div>Now playing...</div>)} />
-                <Route exact path="/profile" render={()=>(<div>Profile...</div>)} />
+                <Route exact path="/album/:idalbum" component={Album} />
+                <Route exact path="/artist/:idartist" component={Artist} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/profile/:idprofile" component={Profile} />
+                <Route exact path="/now-playing" component={NowPlaying} />
+                <Route path="/results/:type/:keyword" component={MediaGrid} />
                 <Route component={NotFound}/>
             </Switch>
             <Footer />

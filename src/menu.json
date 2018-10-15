@@ -9,34 +9,13 @@
         },
         {
             "id": 2,
-            "title": "Tracks",
-            "description": "Search tracks",
-            "img": "./images/cd.svg",
-            "url": "/tracks"
-        },
-        {
-            "id": 3,
-            "title": "Albums",
-            "description": "Search Albums",
-            "img": "./images/cd.svg",
-            "url": "/albums"
-        },
-        {
-            "id": 4,
-            "title": "Artists",
-            "description": "Search Artists",
-            "img": "./images/singing.svg",
-            "url": "/artist"
-        },
-        {
-            "id": 5,
             "title": "Now Playing",
             "description": "Now Playing",
             "img": "./images/sound-bars.svg",
             "url": "/now-playing"
         },
         {
-            "id": 6,
+            "id": 3,
             "title": "Profile",
             "description": "Profile",
             "img": "./images/user.svg",

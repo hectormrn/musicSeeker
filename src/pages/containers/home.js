@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import ApiClient from "../../http/apiClient";
 import MainLayout from '../components/main-layout';
 import Search from '../../shared/components/search';
-import TrackList from '../../tracks/components/tracks-list';
 import HandleError from "../../error/containers/handle-error";
 import MixPreview from '../components/mix-preview';
 import './App.scss';
@@ -12,7 +11,6 @@ class Home extends Component {
     super();
     this.api = new ApiClient();
     this.state = {
-      loggedIn: false,
       keyword: "",
       mixed: []
     }
@@ -47,10 +45,10 @@ class Home extends Component {
                 handlekp={this.handleKeyPress}
                 onSearch={this.getMixData}
               />
-                <MixPreview data={this.state.mixed[0]} title="Tracks"/>
-                <MixPreview data={this.state.mixed[1]} title="Artists"/>
-                <MixPreview data={this.state.mixed[2]} title="Albums"/>
-                <MixPreview data={this.state.mixed[3]} title="Playlists"/>
+                <MixPreview data={this.state.mixed[0]} title="Tracks" qry={this.state.keyword}/>
+                <MixPreview data={this.state.mixed[1]} title="Artists" qry={this.state.keyword}/>
+                <MixPreview data={this.state.mixed[2]} title="Albums" qry={this.state.keyword}/>
+                <MixPreview data={this.state.mixed[3]} title="Playlists" qry={this.state.keyword}/>
             </Fragment>
         </MainLayout>
       </HandleError>
