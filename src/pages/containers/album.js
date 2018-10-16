@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from "react";
+import AlbumLayout from "../../pages/components/album/album-layout";
 import ApiClient from "../../http/apiClient";
-import { getMediaThumbnail } from '../../http/utilities';
+import MediaSummary from "../../shared/components/media-summary";
+import TrakcList from "../../shared/components/track-list";
+import Loading from '../../shared/container/loading';
+import LoadingIcon from '../../shared/components/loading-icon';
 
 class Album extends Component {
     constructor(){
@@ -14,7 +18,7 @@ class Album extends Component {
 
     componentDidMount() {
         const { idalbum } = this.props.match.params
-        idalbum ? this.getAlbumByIdParams(idalbum): this.getAlbumDefault();
+        idalbum && this.getAlbumByIdParams(idalbum)
     }
 
     getAlbumByIdParams(id) {
@@ -23,44 +27,19 @@ class Album extends Component {
         })
     }
 
-    getAlbumDefault() {
-        console.log("TODO something...")
-    }
-
     render() {
         return(
-            <div className="container">
+            <AlbumLayout>
                 {
                     Object.keys(this.state.album).length > 0 ?
                     <Fragment>
-                    <div className="row">
-                        <div className="col-lg-3 col-md-4 col-sm-6">
-                        <img src={getMediaThumbnail(this.state.album)} 
-                            className="rounded float-left"
-                            width={200} height={200}
-                        />
-                        </div>
-                        <div className="col-lg-9 col-md-8 col-sm-6">
-                            <label>ÁLBUM</label>
-                            <h3>{this.state.album.name}</h3>
-                            <p>De <b>{this.state.album.artists[0].name}</b></p>
-                            <p>{this.state.album.release_date} | {this.state.album.total_tracks} canciones</p>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <ul>
-                        {
-                            this.state.album.tracks.items.map( item => {
-                                return <li key={item.id}>{item.name}</li>
-                            })
-                        }
-                        </ul>
-                    </div>
+                        <MediaSummary data={this.state.album} />
+                        <TrakcList tracks={this.state.album.tracks}/>
                     </Fragment>   
                     :
-                    <div><h1>Album View:</h1> {JSON.stringify(this.props)}</div>
+                    <Loading><LoadingIcon /></Loading>
                 }
-            </div>
+            </AlbumLayout>
         )
     }
 

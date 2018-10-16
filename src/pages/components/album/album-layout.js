@@ -1,7 +1,7 @@
 import React from "react";
-import './layouts.scss';
+import '../layouts.scss';
 
-function MainLayout (props) {
+function AlbumLayout (props) {
     return (
         <section className="main">
             <div className="container">
@@ -11,4 +11,4 @@ function MainLayout (props) {
     )
 }
 
-export default MainLayout;
+export default AlbumLayout;

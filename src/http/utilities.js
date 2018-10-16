@@ -1,4 +1,5 @@
 const path = require('path');
+import moment from "moment";
 
 const getHashParams = () => {
     var hashParams = {};
@@ -10,6 +11,11 @@ const getHashParams = () => {
        e = r.exec(q);
     }
     return hashParams;
+}
+
+export const durationFormat = ms => {
+    var tempTime = moment.duration(ms);
+    return `${tempTime.minutes()} : ${tempTime.seconds()<=9?'0'+tempTime.seconds(): tempTime.seconds()}`
 }
 
 export const getMediaThumbnail = (data) => {

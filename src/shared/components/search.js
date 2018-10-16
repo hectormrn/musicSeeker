@@ -8,6 +8,7 @@ const Search = (props) => (
                     onChange={props.onTyping}
                     onKeyPress={props.handlekp}
                     className="form-control"
+                    autoFocus
                 />
                 <div className="input-group-append">
                     <button 
