@@ -62,7 +62,7 @@ const httpErrorHandler = new HttpExceptionHanlder();
             //httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
-
+    
     searchAlbums (albumName, l = 10) {
         return spotifyApi.searchAlbums(albumName, {limit: l})
         .then( (data) => {
@@ -72,6 +72,16 @@ const httpErrorHandler = new HttpExceptionHanlder();
         }, (error) => {
             console.log("Request failed albums, ", error)
             //httpErrorHandler.httpCode(error, ApiClient.exit);
+        })
+    }
+
+    getAlbumById (id) {
+        return spotifyApi.getAlbum(id)
+        .then( (resp) => {
+            console.log(resp)
+            return resp;
+        }, error => {
+            console.log("Search album by id Failed...", error)
         })
     }
 
