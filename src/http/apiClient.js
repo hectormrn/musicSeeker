@@ -51,6 +51,16 @@ const httpErrorHandler = new HttpExceptionHanlder();
         })
     }
 
+    getArtistTopTracks (id) {
+        return spotifyApi.getArtistTopTracks(id, 'MX')
+        .then( (resp) => {
+            console.log("Top tracks: ", resp)
+            return resp.tracks;
+        }, error => {
+            console.log("Search top tracks Failed...", error)
+        })
+    }
+
     searchArtists (artistName, l = 10) {
         return spotifyApi.searchArtists(artistName, {limit: l})
         .then( (data) => {
@@ -60,6 +70,16 @@ const httpErrorHandler = new HttpExceptionHanlder();
         }, (error) => {
             console.log("Request failed artistas, ", error)
             //httpErrorHandler.httpCode(error, ApiClient.exit);
+        })
+    }
+
+    getArtistById (id) {
+        return spotifyApi.getArtist(id)
+        .then( (resp) => {
+            console.log(resp)
+            return resp;
+        }, error => {
+            console.log("Search artist by id Failed...", error)
         })
     }
     
@@ -111,6 +131,14 @@ const httpErrorHandler = new HttpExceptionHanlder();
         })
     }
     
+    getMe () {
+        return spotifyApi.getMe().then(resp => {
+            console.log("ME: ", resp)
+            return resp;
+        }, failed => {
+            console.log("Fallo request getMe :( ")
+        })
+    }
 
  }
 

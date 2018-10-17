@@ -5,6 +5,7 @@ import MediaSummary from "../../shared/components/media-summary";
 import TrakcList from "../../shared/components/track-list";
 import Loading from '../../shared/container/loading';
 import LoadingIcon from '../../shared/components/loading-icon';
+import HandleError from "../../error/containers/handle-error";
 
 class Album extends Component {
     constructor(){
@@ -29,17 +30,19 @@ class Album extends Component {
 
     render() {
         return(
-            <AlbumLayout>
+            <HandleError>
+                <AlbumLayout>
                 {
                     Object.keys(this.state.album).length > 0 ?
                     <Fragment>
                         <MediaSummary data={this.state.album} />
-                        <TrakcList tracks={this.state.album.tracks}/>
+                        <TrakcList tracks={this.state.album.tracks.items}/>
                     </Fragment>   
                     :
                     <Loading><LoadingIcon /></Loading>
                 }
-            </AlbumLayout>
+                </AlbumLayout>
+            </HandleError>
         )
     }
 

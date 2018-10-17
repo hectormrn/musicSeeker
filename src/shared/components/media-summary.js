@@ -11,10 +11,21 @@ const MediaSummary = props => (
         />
         </div>
         <div className="col-lg-9 col-md-8 col-sm-6">
-            <label>{props.data.album_type}</label>
-            <h5>{props.data.name}</h5>
-            <p>De <b>{props.data.artists[0].name}</b></p>
-            <p>{props.data.release_date} | {props.data.total_tracks} canciones</p>
+        {
+            props.data.type == "artist" ?
+            <div>
+                <label>Artista</label>
+                <h3>{props.data.name}</h3>
+                <p>Seguidores {props.data.followers.total}</p>
+            </div>
+            :
+            <div>
+                <label>{props.data.album_type}</label>
+                <h5>{props.data.name}</h5>
+                <p>De <b>{props.data.artists[0].name}</b></p>
+                <p>{props.data.release_date} | {props.data.total_tracks} canciones</p>
+            </div>
+        }
         </div>
     </div>
 )

@@ -9,7 +9,8 @@ const TrackList = props => {
                 <thead><tr><th>#</th><th>Title</th><th>🕒</th></tr></thead>
                 <tbody>
                 {
-                props.tracks.items.map( track => {
+                props.tracks.length > 0 &&
+                props.tracks.map( track => {
                     let { name, duration_ms} = track;
                     return <TrackItem name={name} duration={duration_ms} idx={i++} key={track.id}/>
                 })
