@@ -20,11 +20,7 @@ const httpErrorHandler = new HttpExceptionHanlder();
 
     setUp () {
         const token = getToken();
-        if (token) {
-        spotifyApi.setAccessToken(token);
-        } else {
-            console.error("No se encontro un TOKEN: <httpException>")
-        }
+        token && spotifyApi.setAccessToken(token);
     }
 
     getSPToken = () => spotifyApi.getAccessToken()
@@ -43,8 +39,6 @@ const httpErrorHandler = new HttpExceptionHanlder();
     searchTracks(trackName, l = 10) { 
         return spotifyApi.searchTracks(trackName, {limit: l})
         .then( (data) => {
-            console.log(`Tracks => ${trackName}`);
-            console.log(data.tracks.items);
             return data.tracks.items;
         }, (error) => {
             httpErrorHandler.httpCode(error, ApiClient.exit);
@@ -54,67 +48,49 @@ const httpErrorHandler = new HttpExceptionHanlder();
     getArtistTopTracks (id) {
         return spotifyApi.getArtistTopTracks(id, 'MX')
         .then( (resp) => {
-            console.log("Top tracks: ", resp)
             return resp.tracks;
         }, error => {
-            console.log("Search top tracks Failed...", error)
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
 
     searchArtists (artistName, l = 10) {
         return spotifyApi.searchArtists(artistName, {limit: l})
         .then( (data) => {
-            console.log(`Artist => ${artistName}`);
-            console.log(data.artists.items);
             return data.artists.items;
-        }, (error) => {
-            console.log("Request failed artistas, ", error)
-            //httpErrorHandler.httpCode(error, ApiClient.exit);
-        })
+        }, (error) => {})
     }
 
     getArtistById (id) {
         return spotifyApi.getArtist(id)
         .then( (resp) => {
-            console.log(resp)
             return resp;
         }, error => {
-            console.log("Search artist by id Failed...", error)
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
     
     searchAlbums (albumName, l = 10) {
         return spotifyApi.searchAlbums(albumName, {limit: l})
         .then( (data) => {
-            console.log(`Albums => ${albumName}`);
-            console.log(data.albums.items);
             return data.albums.items;
-        }, (error) => {
-            console.log("Request failed albums, ", error)
-            //httpErrorHandler.httpCode(error, ApiClient.exit);
-        })
+        }, (error) => {})
     }
 
     getAlbumById (id) {
         return spotifyApi.getAlbum(id)
         .then( (resp) => {
-            console.log(resp)
             return resp;
         }, error => {
-            console.log("Search album by id Failed...", error)
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
 
     searchPlaylists (playlistName, l = 10) {
         return spotifyApi.searchPlaylists(playlistName, {limit: l})
         .then( (data) => {
-            console.log(`Playlist => ${playlistName}`);
-            console.log(data.playlists.items);
             return data.playlists.items;
-        }, (error) => {
-            console.log("Request failed playlists, ", error)
-            //httpErrorHandler.httpCode(error, ApiClient.exit);
-        })
+        }, (error) => {})
     }
 
     searchMixed (keyword, l = 10) {
@@ -127,16 +103,31 @@ const httpErrorHandler = new HttpExceptionHanlder();
         return Promise.all(proms).then( resp => {
             return resp;
         }, failed => {
-            console.log("Request Mixed failed :( ")
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
     
     getMe () {
         return spotifyApi.getMe().then(resp => {
-            console.log("ME: ", resp)
             return resp;
-        }, failed => {
-            console.log("Fallo request getMe :( ")
+        }, error => {
+            httpErrorHandler.httpCode(error, ApiClient.exit);
+        })
+    }
+
+    getNowPlaying () {
+        return spotifyApi.getMyCurrentPlayingTrack().then(resp => {
+            return resp.item;
+        }, error => {
+            httpErrorHandler.httpCode(error, ApiClient.exit);
+        })
+    }
+    
+    getPlaylist (id) {
+        return spotifyApi.getPlaylist(id).then( resp => {
+            return resp
+        }, error => {
+            httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
 

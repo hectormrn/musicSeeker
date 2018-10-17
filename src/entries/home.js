@@ -13,6 +13,7 @@ import Album from '../pages/containers/album';
 import Artist from '../pages/containers/artist';
 import Profile from '../pages/containers/profile';
 import NowPlaying from '../pages/containers/now-playing';
+import PlayList from '../pages/containers/playlist';
 
 const homeContainer = document.getElementById('home-container')
 const api = new ApiClient();
@@ -30,7 +31,8 @@ ReactDOM.render(
                 <Route exact path="/artist/:idartist" component={Artist} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/profile/:idprofile" component={Profile} />
-                <Route exact path="/now-playing" component={NowPlaying} />
+                <Route exact path="/player" component={NowPlaying} />
+                <Route exact path="/playlist/:idplaylist" component={PlayList} />
                 <Route path="/results/:type/:keyword" component={MediaGrid} />
                 <Route component={NotFound}/>
             </Switch>

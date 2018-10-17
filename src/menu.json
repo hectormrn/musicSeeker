@@ -12,7 +12,7 @@
             "title": "Now Playing",
             "description": "Now Playing",
             "img": "./images/sound-bars.svg",
-            "url": "/now-playing"
+            "url": "/player"
         },
         {
             "id": 3,

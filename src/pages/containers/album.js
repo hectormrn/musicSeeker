@@ -36,7 +36,7 @@ class Album extends Component {
                     Object.keys(this.state.album).length > 0 ?
                     <Fragment>
                         <MediaSummary data={this.state.album} />
-                        <TrakcList tracks={this.state.album.tracks.items}/>
+                        <TrakcList tracks={this.state.album.tracks.items} type={this.state.album.type}/>
                     </Fragment>   
                     :
                     <Loading><LoadingIcon /></Loading>

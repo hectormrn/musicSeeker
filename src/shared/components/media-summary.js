@@ -2,6 +2,32 @@ import React from "react";
 import './media-summary.scss';
 import { getMediaThumbnail } from "../../http/utilities";
 
+const RenderSummary = props => {
+    switch (props.data.type) {
+        case 'artist':
+            return(<div>
+                    <label>Artista</label>
+                    <h3>{props.data.name}</h3>
+                    <p>Seguidores {props.data.followers.total}</p>
+                    </div>)
+        case 'playlist':
+            return(<div>
+                    <label>Playlist</label>
+                    <h3>{props.data.name}</h3>
+                    <p>Created by {props.data.owner.display_name} - {props.data.tracks.total} songs</p>
+                    <p>Seguidores {props.data.followers.total}</p>
+                </div>)
+        default:
+            return(<div>
+                    <label>Album</label>
+                    <h3>{props.data.name}</h3>
+                    <p>By {props.data.artists[0].name}</p>
+                    <p>{props.data.release_date}</p>
+                </div>)
+
+    }
+}
+
 const MediaSummary = props => (
     <div className="row MediaSummary">
         <div className="col-lg-3 col-md-4 col-sm-6">
@@ -11,21 +37,7 @@ const MediaSummary = props => (
         />
         </div>
         <div className="col-lg-9 col-md-8 col-sm-6">
-        {
-            props.data.type == "artist" ?
-            <div>
-                <label>Artista</label>
-                <h3>{props.data.name}</h3>
-                <p>Seguidores {props.data.followers.total}</p>
-            </div>
-            :
-            <div>
-                <label>{props.data.album_type}</label>
-                <h5>{props.data.name}</h5>
-                <p>De <b>{props.data.artists[0].name}</b></p>
-                <p>{props.data.release_date} | {props.data.total_tracks} canciones</p>
-            </div>
-        }
+            {RenderSummary(props)}
         </div>
     </div>
 )

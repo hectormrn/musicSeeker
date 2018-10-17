@@ -39,7 +39,7 @@ class Artist extends Component {
                     Object.keys(this.state.artist).length > 0 ?
                     <Fragment>
                         <MediaSummary data={this.state.artist} />
-                        <TrakcList tracks={this.state.topTracks}/>   
+                        <TrakcList tracks={this.state.topTracks} type={this.state.artist.type}/>   
                     </Fragment>
                     :
                     <Loading><LoadingIcon /></Loading>
