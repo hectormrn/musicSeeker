@@ -40,10 +40,10 @@ class MediaGrid extends Component {
 
     render() {
         return(
-            <div class="container">
+            <div className="container">
                 {
                     this.state.listShow && this.state.listShow.length > 0 ?
-                    <div class="row">
+                    <div className="row">
                     {
                         this.state.listShow.map( item => {
                             return <GridItem data={item} key={item.id}/>    
