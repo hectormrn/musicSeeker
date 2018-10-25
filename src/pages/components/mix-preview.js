@@ -15,7 +15,7 @@ const MixPreview = props => (
                     </div>
                 {
                     props.data.map( item => {
-                        return <Media data={item} key={item.id}/>    
+                        return <Media data={item} key={item.id} insideGrid={false}/>    
                     })
                 }
                 </div>

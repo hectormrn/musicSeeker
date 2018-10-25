@@ -1,6 +1,4 @@
-/**
- *
- */
+
 import SpotifyWebApi from "spotify-web-api-js";
 import { getToken } from './utilities';
 import HttpExceptionHanlder from "./httpExceptionHandler";
@@ -93,16 +91,22 @@ const httpErrorHandler = new HttpExceptionHanlder();
         }, (error) => {})
     }
 
-    searchMixed (keyword, l = 10) {
+    searchMixed (keyword, l = 10, type = null) {
         let proms = [
             this.searchTracks(keyword, l),
             this.searchArtists(keyword, l),
             this.searchAlbums(keyword, l),
             this.searchPlaylists(keyword, l)
         ]
+        if (type) {
+            let index = ["tracks", "artists", "albums", "playlists"].indexOf(type)
+            proms = proms.filter( (p, i) => {
+                return index === i                
+            })
+        }
         return Promise.all(proms).then( resp => {
             return resp;
-        }, failed => {
+        }, error => {
             httpErrorHandler.httpCode(error, ApiClient.exit);
         })
     }
@@ -117,7 +121,8 @@ const httpErrorHandler = new HttpExceptionHanlder();
 
     getNowPlaying () {
         return spotifyApi.getMyCurrentPlayingTrack().then(resp => {
-            return resp.item;
+            return resp.item ? resp.item :
+                httpErrorHandler.noContent({error: {status: 204, message: 'Content not found'}});
         }, error => {
             httpErrorHandler.httpCode(error, ApiClient.exit);
         })

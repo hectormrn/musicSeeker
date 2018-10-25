@@ -47,7 +47,7 @@ class NowPlaying extends PureComponent {
         return(
             <section className="main" style={uis.mrgTop}>
             {
-                Object.keys(this.state.playing).length > 0 ?
+                this.state.playing && Object.keys(this.state.playing).length > 0 ?
                 <div className="jumbotron" style={uis.txCenter}>
                     <img src={getMediaThumbnail(this.state.playing)} width={350} height={350}/> 
                     <div className="container" style={uis.txCenter}>

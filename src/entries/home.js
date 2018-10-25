@@ -8,7 +8,7 @@ import menu from "../menu.json";
 import ApiClient from '../http/apiClient';
 import Login from '../pages/components/login';
 import Footer from '../shared/components/footer';
-import MediaGrid from '../pages/components/media-grid';
+import MediaGrid from '../pages/containers/media-grid';
 import Album from '../pages/containers/album';
 import Artist from '../pages/containers/artist';
 import Profile from '../pages/containers/profile';
