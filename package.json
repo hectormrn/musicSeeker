@@ -9,7 +9,7 @@
     "build:local": "webpack --env.NODE_ENV=local",
     "build:prod": "webpack -p --env.NODE_ENV=production",
     "server": "webpack --config webpack.server.config.js && babel-node --presets react,es2015,stage-2 server.js",
-    "express:start": "node auth-server/authorization_code/app.js"
+    "express:start": "node src/server.js"
   },
   "repository": {
     "type": "git",
