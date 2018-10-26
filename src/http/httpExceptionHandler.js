@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 
 class HttpExceptionHanlder {
     
@@ -9,9 +10,9 @@ class HttpExceptionHanlder {
         location.href = "http://localhost:9000";
     }
 
-    httpCode(error, callback = undefined) {
-        let err = JSON.parse(error.response);
-        console.warn(err);
+    httpCode(_error, callback = undefined) {
+        let err = JSON.parse(_error.response);
+        logger(this.msg, _error)('e');
         alert(`SpotifyErr - ${err.error.message || this.msg}`);
         switch (err.error.status) {
             case 401:
@@ -22,6 +23,7 @@ class HttpExceptionHanlder {
 
     noContent(err, callback) {
         alert(`SpotifyErr - ${err.error.message || this.msg}`);
+        logger('Error ', err)('e');
         typeof callback == "function" ? callback(): this.redirectToHome();
     }
  }

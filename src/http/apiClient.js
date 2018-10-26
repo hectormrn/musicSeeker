@@ -92,18 +92,22 @@ const httpErrorHandler = new HttpExceptionHanlder();
     }
 
     searchMixed (keyword, l = 10, type = null) {
-        let proms = [
-            this.searchTracks(keyword, l),
-            this.searchArtists(keyword, l),
-            this.searchAlbums(keyword, l),
-            this.searchPlaylists(keyword, l)
-        ]
-        if (type) {
-            let index = ["tracks", "artists", "albums", "playlists"].indexOf(type)
-            proms = proms.filter( (p, i) => {
-                return index === i                
-            })
-        }
+        let proms = []
+        let promiseMap = {
+            tracks: this.searchTracks,
+            artists: this.searchArtists,
+            albums: this.searchAlbums,
+            playlists: this.searchPlaylists,
+        };
+
+        type ?
+            promiseMap.hasOwnProperty(type) && proms.push( promiseMap[type].call(this, keyword, l) )
+        :
+            Object.keys(promiseMap).forEach(k => {
+                proms.push(promiseMap[k].call(this, keyword, l))
+            });
+        ;
+        
         return Promise.all(proms).then( resp => {
             return resp;
         }, error => {

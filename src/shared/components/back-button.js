@@ -4,10 +4,6 @@ import './back-button.scss';
 
 class BackButton extends Component {
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     handleClick = () => this.props.history.goBack();
 
     render() {
