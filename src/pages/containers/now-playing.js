@@ -52,10 +52,10 @@ class NowPlaying extends PureComponent {
                     <img src={getMediaThumbnail(this.state.playing)} width={350} height={350}/> 
                     <div className="container" style={uis.txCenter}>
                         <h2 style={uis.pdgTop}>{this.state.playing.name}</h2>
-                        <p class="badge badge-secondary" style={uis.fs}>
+                        <p className="badge badge-secondary" style={uis.fs}>
                             Album: {this.state.playing.album.name}
                         </p><br />
-                        <p class="badge badge-success" style={uis.fs}>
+                        <p className="badge badge-success" style={uis.fs}>
                             By: {this.state.playing.artists[0].name}
                         </p>
                     </div>      
