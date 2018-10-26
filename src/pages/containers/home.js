@@ -39,17 +39,22 @@ class Home extends Component {
     return (
       <HandleError>
         <MainLayout>
-            <Fragment>
               <Search 
                 onTyping={ e => this.setState({keyword: e.target.value})}
                 handlekp={this.handleKeyPress}
                 onSearch={this.getMixData}
               />
-                <MixPreview data={this.state.mixed[0]} title="Tracks" qry={this.state.keyword}/>
-                <MixPreview data={this.state.mixed[1]} title="Artists" qry={this.state.keyword}/>
-                <MixPreview data={this.state.mixed[2]} title="Albums" qry={this.state.keyword}/>
-                <MixPreview data={this.state.mixed[3]} title="Playlists" qry={this.state.keyword}/>
-            </Fragment>
+              {
+                this.state.mixed.length > 0 ?
+                <Fragment>
+                  <MixPreview data={this.state.mixed[0]} title="Tracks" qry={this.state.keyword}/>
+                  <MixPreview data={this.state.mixed[1]} title="Artists" qry={this.state.keyword}/>
+                  <MixPreview data={this.state.mixed[2]} title="Albums" qry={this.state.keyword}/>
+                  <MixPreview data={this.state.mixed[3]} title="Playlists" qry={this.state.keyword}/>
+                </Fragment>
+                :
+                <h1 style={{textAlign: 'center', fontSize:'10rem', marginTop: '60px'}}>🎧</h1>
+              }
         </MainLayout>
       </HandleError>
     )

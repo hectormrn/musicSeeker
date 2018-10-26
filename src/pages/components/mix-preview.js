@@ -6,7 +6,7 @@ import './mix-preview.scss';
 const MixPreview = props => (
     <div className="container Mix" >
         {
-            props.data && props.data.length > 0 ?
+            props.data && props.data.length > 0 &&
             <Fragment>
                 <div className="row border Mix-body" >
                     <div className="col-md-12">
@@ -19,9 +19,7 @@ const MixPreview = props => (
                     })
                 }
                 </div>
-            </Fragment>
-            :
-            <div style={{textAlign:"center"}}>Loading {props.title} ⌛ ...</div>    
+            </Fragment>    
         }
     </div>
 )
