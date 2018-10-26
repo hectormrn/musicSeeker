@@ -6,6 +6,7 @@ import TrakcList from "../../shared/components/track-list";
 import Loading from '../../shared/container/loading';
 import LoadingIcon from '../../shared/components/loading-icon';
 import HandleError from "../../error/containers/handle-error";
+import BackButton from "../../shared/components/back-button";
 
 class Album extends Component {
     constructor(){
@@ -28,6 +29,8 @@ class Album extends Component {
         })
     }
 
+    handleClick = (e) => this.props.history.goBack()
+
     render() {
         return(
             <HandleError>
@@ -35,6 +38,7 @@ class Album extends Component {
                 {
                     Object.keys(this.state.album).length > 0 ?
                     <Fragment>
+                        <BackButton />
                         <MediaSummary data={this.state.album} />
                         <TrakcList tracks={this.state.album.tracks.items} type={this.state.album.type}/>
                     </Fragment>   

@@ -6,6 +6,7 @@ import TrakcList from "../../shared/components/track-list";
 import Loading from '../../shared/container/loading';
 import LoadingIcon from '../../shared/components/loading-icon';
 import HandleError from "../../error/containers/handle-error";
+import BackButton from "../../shared/components/back-button";
 
 class Artist extends Component {
     constructor(){
@@ -38,6 +39,7 @@ class Artist extends Component {
                 {
                     Object.keys(this.state.artist).length > 0 ?
                     <Fragment>
+                        <BackButton />
                         <MediaSummary data={this.state.artist} />
                         <TrakcList tracks={this.state.topTracks} type={this.state.artist.type}/>   
                     </Fragment>

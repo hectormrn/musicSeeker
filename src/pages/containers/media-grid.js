@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ApiClient from "../../http/apiClient";
 import Media from '../../shared/components/media';
 import Loading from "../../shared/container/loading";
 import LoadingIcon from '../../shared/components/loading-icon';
+import BackButton from "../../shared/components/back-button";
 
 class MediaGrid extends Component {
     constructor () {
@@ -25,6 +26,8 @@ class MediaGrid extends Component {
             <div className="container">
                 {
                     this.state.gridItems && this.state.gridItems.length > 0 ?
+                    <Fragment>
+                    <BackButton />
                     <div className="row" style={{justifyContent: 'center'}}>
                     {
                         this.state.gridItems.map( item => {
@@ -32,6 +35,7 @@ class MediaGrid extends Component {
                         })
                     }
                     </div>
+                    </Fragment>
                     :
                     <Loading><LoadingIcon /></Loading>
                 }

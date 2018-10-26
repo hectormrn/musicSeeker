@@ -6,6 +6,7 @@ import Loading from "../../shared/container/loading";
 import LoadingIcon from "../../shared/components/loading-icon";
 import MediaSummary from '../../shared/components/media-summary';
 import TrakcList from "../../shared/components/track-list";
+import BackButton from "../../shared/components/back-button";
 
 class PlayList extends Component {
     constructor() {
@@ -35,6 +36,7 @@ class PlayList extends Component {
                 {
                     Object.keys(this.state.playlist).length ?
                     <Fragment>
+                        <BackButton />
                         <MediaSummary data={this.state.playlist} />
                         <TrakcList tracks={this.state.playlist.tracks.items} type={this.state.playlist.type}/>
                     </Fragment>
