@@ -4,7 +4,7 @@ import MainLayout from '../components/main-layout';
 import Search from '../../shared/components/search';
 import HandleError from "../../error/containers/handle-error";
 import MixPreview from '../components/mix-preview';
-import './App.scss';
+import './app.scss';
 
 class Home extends Component {
   constructor(props){
@@ -22,7 +22,7 @@ class Home extends Component {
       this.setState({mixed: []});
       return;
     }
-    this.api.searchMixed(this.state.keyword, 4)
+    this.api.searchMixed(this.state.keyword, null, {limit: 4})
     .then( (mixData) => {
       this.setState({mixed: mixData})
     });

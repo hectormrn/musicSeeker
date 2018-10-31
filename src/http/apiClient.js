@@ -2,6 +2,7 @@
 import SpotifyWebApi from "spotify-web-api-js";
 import { getToken } from './utilities';
 import HttpExceptionHanlder from "./httpExceptionHandler";
+import { logger } from "./logger";
 
 const spotifyApi = new SpotifyWebApi();
 let instance = null;
@@ -34,8 +35,8 @@ const httpErrorHandler = new HttpExceptionHanlder();
      * @param {String} trackName keyword track name 
      * @param {Integer} l limit of records 
      */
-    searchTracks(trackName, l = 10) { 
-        return spotifyApi.searchTracks(trackName, {limit: l})
+    searchTracks(trackName, options) { 
+        return spotifyApi.searchTracks(trackName, options)
         .then( (data) => {
             return data.tracks.items;
         }, (error) => {
@@ -52,8 +53,8 @@ const httpErrorHandler = new HttpExceptionHanlder();
         })
     }
 
-    searchArtists (artistName, l = 10) {
-        return spotifyApi.searchArtists(artistName, {limit: l})
+    searchArtists (artistName, options) {
+        return spotifyApi.searchArtists(artistName, options)
         .then( (data) => {
             return data.artists.items;
         }, (error) => {})
@@ -68,8 +69,8 @@ const httpErrorHandler = new HttpExceptionHanlder();
         })
     }
     
-    searchAlbums (albumName, l = 10) {
-        return spotifyApi.searchAlbums(albumName, {limit: l})
+    searchAlbums (albumName, options) {
+        return spotifyApi.searchAlbums(albumName, options)
         .then( (data) => {
             return data.albums.items;
         }, (error) => {})
@@ -84,14 +85,14 @@ const httpErrorHandler = new HttpExceptionHanlder();
         })
     }
 
-    searchPlaylists (playlistName, l = 10) {
-        return spotifyApi.searchPlaylists(playlistName, {limit: l})
+    searchPlaylists (playlistName, options) {
+        return spotifyApi.searchPlaylists(playlistName, options)
         .then( (data) => {
             return data.playlists.items;
         }, (error) => {})
     }
 
-    searchMixed (keyword, l = 10, type = null) {
+    searchMixed (keyword, type = null, options) {
         let proms = []
         let promiseMap = {
             tracks: this.searchTracks,
@@ -101,10 +102,10 @@ const httpErrorHandler = new HttpExceptionHanlder();
         };
 
         type ?
-            promiseMap.hasOwnProperty(type) && proms.push( promiseMap[type].call(this, keyword, l) )
+            promiseMap.hasOwnProperty(type) && proms.push( promiseMap[type].call(this, keyword, options) )
         :
             Object.keys(promiseMap).forEach(k => {
-                proms.push(promiseMap[k].call(this, keyword, l))
+                proms.push(promiseMap[k].call(this, keyword, options))
             });
         ;
         
@@ -138,6 +139,10 @@ const httpErrorHandler = new HttpExceptionHanlder();
         }, error => {
             httpErrorHandler.httpCode(error, ApiClient.exit);
         })
+    }
+
+    search(keyword, type, options) {
+        return this.searchMixed(keyword, type, options)
     }
 
  }

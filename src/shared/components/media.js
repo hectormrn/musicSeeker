@@ -15,12 +15,12 @@ const renderThumbnailMedia = (props) => {
     let imgWrapper;
     return (type) => {
         imgWrapper = type == "track" ? 
-            <img className={getImgMediaClass(props.data.type)} 
+            <img className={getImgMediaClass(props.data)} 
                 width={80} height={80} src={getMediaThumbnail(props.data)}
             />
             : 
             <Link to={`/${props.data.type}/${props.data.id}`}>
-                <img className={getImgMediaClass(props.data.type)} 
+                <img className={getImgMediaClass(props.data)} 
                     width={80} height={80} src={getMediaThumbnail(props.data)}
                 />
             </Link>
