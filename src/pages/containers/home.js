@@ -4,7 +4,7 @@ import MainLayout from '../components/main-layout';
 import Search from '../../shared/components/search';
 import HandleError from "../../error/containers/handle-error";
 import MixPreview from '../components/mix-preview';
-import './app.scss';
+import './App.scss';
 
 class Home extends Component {
   constructor(props){
@@ -12,7 +12,8 @@ class Home extends Component {
     this.api = new ApiClient();
     this.state = {
       keyword: "",
-      mixed: []
+      mixed: [],
+      typeContent: ['Tracks','Artists','Albums','Playlists'] 
     }
   }
 
@@ -44,16 +45,11 @@ class Home extends Component {
                 handlekp={this.handleKeyPress}
                 onSearch={this.getMixData}
               />
+              {this.state.mixed.length === 0 && <h1 style={{textAlign: 'center', fontSize:'10rem', marginTop: '60px'}}>🎧</h1> }
               {
-                this.state.mixed.length > 0 ?
-                <Fragment>
-                  <MixPreview data={this.state.mixed[0]} title="Tracks" qry={this.state.keyword}/>
-                  <MixPreview data={this.state.mixed[1]} title="Artists" qry={this.state.keyword}/>
-                  <MixPreview data={this.state.mixed[2]} title="Albums" qry={this.state.keyword}/>
-                  <MixPreview data={this.state.mixed[3]} title="Playlists" qry={this.state.keyword}/>
-                </Fragment>
-                :
-                <h1 style={{textAlign: 'center', fontSize:'10rem', marginTop: '60px'}}>🎧</h1>
+                this.state.mixed.map( (item, index) => {
+                  return <MixPreview data={item} title={this.state.typeContent[index]} qry={this.state.keyword} key={index}/>
+                })
               }
         </MainLayout>
       </HandleError>
