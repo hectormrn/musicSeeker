@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import Home from '../pages/containers/home';
 import NotFound from '../pages/components/not-found';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../shared/components/header";
 import menu from "../menu.json";
 import ApiClient from '../http/apiClient';
@@ -19,23 +19,23 @@ const homeContainer = document.getElementById('home-container')
 const api = new ApiClient();
 let settings = api.getSPToken();
 
-ReactDOM.render( 
+ReactDOM.render(
     <BrowserRouter>
     {
         settings ?
         <Fragment>
             <Header data={menu}/>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/album/:idalbum" component={Album} />
-                <Route exact path="/artist/:idartist" component={Artist} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/profile/:idprofile" component={Profile} />
-                <Route exact path="/player" component={NowPlaying} />
-                <Route exact path="/playlist/:idplaylist" component={PlayList} />
-                <Route path="/results/:type/:keyword" component={MediaGrid} />
-                <Route component={NotFound}/>
-            </Switch>
+            <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/album/:idalbum" element={<Album />} />
+                <Route exact path="/artist/:idartist" element={<Artist />} />
+                <Route exact path="/profile" element={Profile} />
+                <Route exact path="/profile/:idprofile" element={<Profile />} />
+                <Route exact path="/player" element={<NowPlaying />} />
+                <Route exact path="/playlist/:idplaylist" element={<PlayList />} />
+                <Route path="/results/:type/:keyword" element={<MediaGrid />} />
+                <Route element={<NotFound />}/>
+            </Routes>
             <Footer />
         </Fragment>
         :

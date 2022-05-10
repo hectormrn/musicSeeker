@@ -1,4 +1,3 @@
-const path = require('path');
 import moment from "moment";
 
 const getHashParams = () => {
